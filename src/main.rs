@@ -16,6 +16,11 @@ fn main() {
     let metar_string = metar::get_metar_string(metar);
     let metar_data = metar::split_metar_string(metar_string);
 
+    if metar_data.len() == 1 {
+        println!("ERROR: No data for this airport.");
+        exit(0);
+    }
+
     let date = data::parse_date(metar_data[2].to_string());
     let temp = data::parse_temp(metar_data[5].to_string());
     let altim = data::parse_altimeter(metar_data[11].to_string());
